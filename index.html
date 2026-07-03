@@ -13,6 +13,10 @@
       justify-content: center;
       background: #f5f5f7;
       font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+      transition: background 0.2s ease;
+    }
+    body.dark {
+      background: #1a1a1a;
     }
     .card {
       background: #ffffff;
@@ -20,14 +24,57 @@
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       text-align: center;
+      transition: background 0.2s ease;
+    }
+    body.dark .card {
+      background: #2a2a2a;
     }
     h1 {
       margin: 0 0 0.5rem;
       color: #1a1a1a;
+      transition: color 0.2s ease;
+    }
+    body.dark h1 {
+      color: #f5f5f7;
     }
     p {
       margin: 0;
       color: #555;
+      transition: color 0.2s ease;
+    }
+    body.dark p {
+      color: #ccc;
+    }
+    .buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    body.dark button {
+      background: #f5f5f7;
+      color: #1a1a1a;
+    }
+    button:hover {
+      opacity: 0.85;
+    }
+    #greeting {
+      margin-top: 1rem;
+      min-height: 1.2rem;
+      color: #1a1a1a;
+      transition: color 0.2s ease;
+    }
+    body.dark #greeting {
+      color: #f5f5f7;
     }
   </style>
 </head>
@@ -35,6 +82,32 @@
   <div class="card">
     <h1>ad-test</h1>
     <p>간단한 HTML 페이지입니다.</p>
+    <p id="counter">클릭 횟수: 0</p>
+    <div class="buttons">
+      <button id="counterBtn">카운트 증가</button>
+      <button id="themeBtn">테마 전환</button>
+      <button id="greetBtn">인사하기</button>
+    </div>
+    <p id="greeting"></p>
   </div>
+
+  <script>
+    let count = 0;
+    const counterEl = document.getElementById("counter");
+    document.getElementById("counterBtn").addEventListener("click", () => {
+      count += 1;
+      counterEl.textContent = `클릭 횟수: ${count}`;
+    });
+
+    document.getElementById("themeBtn").addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+
+    const greetings = ["안녕하세요!", "반갑습니다!", "좋은 하루 되세요!"];
+    document.getElementById("greetBtn").addEventListener("click", () => {
+      const message = greetings[Math.floor(Math.random() * greetings.length)];
+      document.getElementById("greeting").textContent = message;
+    });
+  </script>
 </body>
 </html>
